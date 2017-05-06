@@ -6,13 +6,15 @@ var Raspi = require("raspi-io");
 //Gestion UI/Web
 var webman = require("./webman.js");
 
-/*var board = new five.Board({
+//On définit la carte comme Raspberry Pi
+var board = new five.Board({
   io: new Raspi()
 });
 
+//Fonction principale
 board.on("ready", function() {
   console.log(":)");
-});*/
+});
 
 
 console.log("Start");

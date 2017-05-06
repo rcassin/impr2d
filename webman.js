@@ -25,17 +25,20 @@ app.get('/', function (req, res) {
     u.log(tag, "/")
 });
 
+//Def fichier ressources
 app.use("/assets", express.static(path.join(config.ServRoot, 'assets')));
 
 //Def Socket
 io.on('connection', function (socket) {
     global.socketio.enable = true;
+
+    //Affiche logs sur page web
     global.socketio.sendLog = function(tag, msg){
-        socket.emit("log",{ "msg": "[" + tag + "] " + msg });
+        socket.broadcast.emit("log",{ "msg": "[" + tag + "] " + msg });
     }
+
+    //Message de bienvenue
     var tag = "SOCKET.IO";
     global.socketio.sendLog(tag, "Hello")
-    u.log(tag, "Nouveau client");
-
-    
+    u.log(tag, "Nouveau client");    
 });

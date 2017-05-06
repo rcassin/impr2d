@@ -1,6 +1,6 @@
 
 /**
- * Log
+ * Affiche les logs dans la console
  * @param {string} tag
  * @param {string} message
  */

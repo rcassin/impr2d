@@ -1,6 +1,7 @@
 //Bibliotheques
 //Serveur Web
-var app = require('express')();
+var express = require('express');
+var app = express();
 var server = require('http').Server(app);
 //Serveur Socket
 var io = require('socket.io')(server);
@@ -8,6 +9,11 @@ var io = require('socket.io')(server);
 var config = require('./config.js');
 
 var u = require("./utils.js");
+var path = require('path');
+
+//Mise en place des variables globals
+global.socketio = {};
+global.socketio.enable = false;
 
 //Init du Serveur
 server.listen(config.ServPort);
@@ -19,8 +25,17 @@ app.get('/', function (req, res) {
     u.log(tag, "/")
 });
 
+app.use("/assets", express.static(path.join(config.ServRoot, 'assets')));
+
 //Def Socket
 io.on('connection', function (socket) {
-    var tag = "SOCKET.IO"
-    u.log(tag, "Nouveau client")
+    global.socketio.enable = true;
+    global.socketio.sendLog = function(tag, msg){
+        socket.emit("log",{ "msg": "[" + tag + "] " + msg });
+    }
+    var tag = "SOCKET.IO";
+    global.socketio.sendLog(tag, "Hello")
+    u.log(tag, "Nouveau client");
+
+    
 });

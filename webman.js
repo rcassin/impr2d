@@ -34,7 +34,7 @@ io.on('connection', function (socket) {
 
     //Affiche logs sur page web
     global.socketio.sendLog = function(tag, msg){
-        socket.broadcast.emit("log",{ "msg": "[" + tag + "] " + msg });
+        socket.emit("log",{ "msg": "[" + tag + "] " + msg });
     }
 
     //Message de bienvenue

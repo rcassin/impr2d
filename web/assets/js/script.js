@@ -1,4 +1,5 @@
 var socket = io();
+moment().format("fr");
 
 //Définition du mot-clé "log"
 socket.on("log", afficherLog);
@@ -18,7 +19,7 @@ function afficherLog (data)
     var logDiv = $("<div>").attr("id", "log" + logId);
 
     //On définit les spans
-    var logTime = $("<span>").addClass("logTime").text(moment().format('hh:mm:ss'));
+    var logTime = $("<span>").addClass("logTime").text(moment().format('HH:mm:ss'));
     var logMessage = $("<span>").addClass("logMessage").text(data.msg);
 
     //On applique les changements

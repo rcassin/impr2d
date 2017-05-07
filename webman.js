@@ -14,6 +14,8 @@ var path = require('path');
 //Mise en place des variables globals
 global.socketio = {};
 global.socketio.enable = false;
+//Pour éviter les crashs
+global.socketio.sendLog = function() {return false;}
 
 //Init du Serveur
 server.listen(config.ServPort);

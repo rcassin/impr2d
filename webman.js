@@ -39,8 +39,16 @@ io.on('connection', function (socket) {
         socket.emit("log",{ "msg": "[" + tag + "] " + msg });
     }
 
+    client.on('disconnect', function(){
+        global.socketio.enable = false;
+        //Pour éviter les crashs
+        global.socketio.sendLog = function() {return false;}
+    });
+
     //Message de bienvenue
     var tag = "SOCKET.IO";
     global.socketio.sendLog(tag, "Hello")
     u.log(tag, "Nouveau client");    
 });
+
+io.on
